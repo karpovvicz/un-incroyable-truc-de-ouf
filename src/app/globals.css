@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --background: 44 20% 99%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 210 55% 25%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 210 55% 25%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 210 55% 25%;
+    --radius: 0.75rem;
+    --gold: 43 74% 38%;
+
+    /* Custom app colors */
+    --cream: 44 20% 99%;
+    --burgundy: 345 64% 27%;
+  }
+
+  body {
+    font-family: var(--font-sans), sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: #fefcf8;
+    color: hsl(var(--foreground));
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif), serif;
+    letter-spacing: -0.02em;
+  }
+}

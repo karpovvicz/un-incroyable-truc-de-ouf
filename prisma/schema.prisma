@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// The master vocabulary pool
+model Word {
+  id          String   @id @default(cuid())
+  french      String
+  english     String
+  rank        Int?              // frequency rank (1-2000 for words, null for fillers)
+  type        WordType           // WORD or FILLER
+  category    String?            // filler category (e.g., "Hesitation", "Emphasis")
+  hint        String?            // usage note / context tip
+  createdAt   DateTime @default(now())
+
+  reviews     Review[]
+
+  @@unique([french, type])
+}
+
+enum WordType {
+  WORD
+  FILLER
+}
+
+// Each time a word enters a learning session
+model Review {
+  id            String       @id @default(cuid())
+  wordId        String
+  word          Word         @relation(fields: [wordId], references: [id])
+  learnedDate   DateTime     @db.Date    // the date it was first learned
+  stage         ReviewStage  @default(LEARNED_TODAY)
+  nextReviewAt  DateTime     @db.Date    // when this review is due
+  completedAt   DateTime?                // when the review was actually done
+  remembered    Boolean?                 // did the user remember it?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([nextReviewAt])
+  @@index([stage])
+  @@index([wordId])
+}
+
+enum ReviewStage {
+  LEARNED_TODAY       // Stage 0: just learned
+  REVIEW_TOMORROW     // Stage 1: review after 1 day
+  REVIEW_WEEK         // Stage 2: review after 7 days
+  REVIEW_TWO_WEEKS    // Stage 3: review after 14 days
+  REVIEW_MONTH        // Stage 4: review after 30 days
+  MASTERED            // Stage 5: completed all reviews
+}
+
+// Track daily sessions for the progress dashboard
+model DailySession {
+  id              String   @id @default(cuid())
+  date            DateTime @db.Date @unique
+  wordsLearned    Int      @default(0)
+  wordsReviewed   Int      @default(0)
+  wordsRemembered Int      @default(0)
+  wordsForgotten  Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
