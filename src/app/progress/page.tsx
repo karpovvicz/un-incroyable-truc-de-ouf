@@ -4,6 +4,8 @@ import { getProgressData, getAllWordsWithStatus } from '@/lib/queries';
 import { STAGE_LABELS, STAGE_COLORS, TOTAL_VOCABULARY_COUNT } from '@/lib/constants';
 import { ReviewStage } from '@prisma/client';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProgressPage() {
   const [progressData, allWords] = await Promise.all([
     getProgressData(),

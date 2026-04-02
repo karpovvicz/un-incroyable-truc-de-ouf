@@ -1,6 +1,8 @@
 import { getDueReviews } from '@/lib/actions';
 import { ReviewSession } from '@/components/review-session';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ReviewPage() {
   const result = await getDueReviews();
 

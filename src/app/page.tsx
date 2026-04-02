@@ -6,6 +6,8 @@ import { getDashboardStats } from '@/lib/queries';
 import { formatDateFrench, formatDateShort } from '@/lib/utils';
 import { BookOpen, RotateCcw } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const stats = await getDashboardStats();
   const today = new Date();

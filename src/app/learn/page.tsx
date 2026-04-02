@@ -1,6 +1,8 @@
 import { getNewWordsForToday } from '@/lib/actions';
 import { LearnSession } from '@/components/learn-session';
 
+export const dynamic = 'force-dynamic';
+
 export default async function LearnPage() {
   const result = await getNewWordsForToday('WORD');
 
