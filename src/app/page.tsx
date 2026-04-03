@@ -17,7 +17,7 @@ export default async function Home() {
       {/* Hero Section */}
       <div className="mb-12 text-center">
         <h1 className="mb-2 font-serif text-5xl md:text-6xl text-foreground">
-          Un Truc de Ouf Incroyable
+          Un Truc de Ouf Incroyable!
         </h1>
         <p className="text-lg text-muted-foreground capitalize">
           {formatDateFrench(today)}
