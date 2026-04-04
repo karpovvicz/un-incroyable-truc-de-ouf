@@ -114,6 +114,19 @@ export function ReviewSession({ reviews }: ReviewSessionProps) {
     );
   }
 
+  // Safety check: ensure currentReview exists
+  if (!currentReview) {
+    return (
+      <Card className="mx-auto max-w-2xl">
+        <CardContent className="py-16 text-center">
+          <p className="text-lg text-muted-foreground">
+            Chargement de la révision...
+          </p>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <div className="mx-auto max-w-3xl">
       {/* Progress bar */}
